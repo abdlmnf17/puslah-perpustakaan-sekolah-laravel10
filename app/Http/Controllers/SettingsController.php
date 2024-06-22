@@ -9,26 +9,37 @@ class SettingsController extends Controller
 {
     public function index()
     {
-
         $settings = Setting::first();
-
         return view('settings.index', compact('settings'));
     }
 
     public function update(Request $request)
     {
-        // Validasi input
-        $request->validate([
-            'nama_web' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
+
+        $validatedData = $request->validate([
+            'nama_web' => 'required|string|max:30',
+            'deskripsi' => 'nullable|string|max:220',
+        ], [
+            'nama_web.required' => 'Nama website harus diisi.',
+            'nama_web.string' => 'Nama website harus berupa teks.',
+            'nama_web.max' => 'Nama website tidak boleh lebih dari :max karakter.',
+            'deskripsi.max' => 'Deskripsi tidak boleh lebih dari :max karakter.',
         ]);
 
-
         $setting = Setting::first();
-        $setting->nama_web = $request->nama_web;
-        $setting->deskripsi = $request->deskripsi;
+
+        if (!$setting) {
+            throw new \Exception('Pengaturan tidak ditemukan.');
+        }
+
+        $setting->nama_web = $validatedData['nama_web'];
+        $setting->deskripsi = $validatedData['deskripsi'];
         $setting->save();
 
-        return redirect()->route('settings.index')->with('success', 'Pengaturan berhasil diperbarui.');
+        if ($setting->wasChanged()) {
+            return redirect()->route('settings.index')->with('success', 'Pengaturan berhasil diperbarui.');
+        } else {
+            return redirect()->route('settings.index')->with('error', 'Tidak ada perubahan yang disimpan.');
+        }
     }
 }

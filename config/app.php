@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
+use App\Models\Setting;
 
 return [
 
@@ -16,7 +17,15 @@ return [
     |
     */
 
+
+
     'name' => env('APP_NAME', 'Laravel'),
+    'titleSettings' => 'Pengaturan',
+    'titleProfil' => 'Profil',
+    'titleEditProfile' => 'Edit Profil',
+    'titleDaftar' => 'Daftar',
+    'titleLogin' => 'Masuk Akun',
+    'titleDashboard' => 'Dashboard',
 
     /*
     |--------------------------------------------------------------------------
