@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nama_web');
             $table->string('deskripsi');
+            $table->string('logo')->nullable();
+            $table->string('favicon')->nullable();
             $table->timestamps();
         });
     }
