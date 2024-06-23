@@ -14,6 +14,7 @@
     <link rel="shortcut icon" href="{{ asset(Storage::url($setting->favicon ?? 'favicons/favicon.ico')) }}" type="image/x-icon">
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+   
 </head>
 
 <body class="font-sans antialiased">
@@ -44,5 +45,6 @@
         </main>
     </div>
 </body>
+
 
 </html>

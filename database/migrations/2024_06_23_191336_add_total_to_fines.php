@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fines', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('borrowing_id')->constrained('borrowings');
-            $table->string('description');
-            $table->timestamps();
+        Schema::table('fines', function (Blueprint $table) {
+            $table->decimal('total', 10, 2)->default(0.00)->after('description');
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fines');
+        Schema::table('fines', function (Blueprint $table) {
+            $table->decimal('total', 10, 2)->default(0.00)->after('description');
+        });
     }
 };

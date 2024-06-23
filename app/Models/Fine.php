@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Fine extends Model
 {
     use HasFactory;
+    protected $fillable = [
+       'description', 'borrowing_id', 'total'
+
+    ];
+
+
+    public function borrowing()
+    {
+        return $this->belongsTo(Borrowing::class);
+    }
 }

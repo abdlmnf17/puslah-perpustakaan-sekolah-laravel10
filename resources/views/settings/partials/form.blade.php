@@ -13,7 +13,7 @@
 
     <!-- description -->
     <div class="mb-4">
-        <x-input-label for="description">{{ __('description') }}</x-input-label>
+        <x-input-label for="description">{{ __('Deskripsi') }}</x-input-label>
         <textarea id="description" name="description" rows="4" class="mt-1 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white sm:text-sm rounded-md">{{ old('description', $settings['description'] ?? '') }}</textarea>
         @error('description')
             <x-input-error-set :message="$message" class="mt-2" />

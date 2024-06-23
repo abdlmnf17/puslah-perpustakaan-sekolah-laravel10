@@ -4,17 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Borrowing;
+use App\Models\Setting;
+use App\Models\User;
+use App\Models\Fine;
 
 class BorrowingController extends Controller
 {
-      /**
+    /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $peminjaman = Borrowing::all();
-        return \view('borrowing.index', \compact('peminjaman'));
+        $settings = Setting::first();
 
+        $peminjaman = Borrowing::query();
+
+        if ($request->has('search') && !empty($request->search)) {
+            $searchTerm = $request->search;
+            $peminjaman->where('book_title', 'like', '%' . $searchTerm . '%');
+        }
+        if ($request->has('name') && !empty($request->name)) {
+            $searchTermName = $request->name;
+            $peminjaman->whereHas('user', function ($query) use ($searchTermName) {
+                $query->where('name', 'like', '%' . $searchTermName . '%');
+            });
+        }
+
+        if ($request->has('status') && !empty($request->status)) {
+            $status = $request->status;
+            $peminjaman->where('status', $status);
+        }
+
+        $peminjaman = $peminjaman->paginate(10);
+
+        return view('borrowing.index', compact('peminjaman'));
     }
 
     /**
@@ -22,7 +45,8 @@ class BorrowingController extends Controller
      */
     public function create()
     {
-        //
+        $users = User::all();
+        return view('borrowing.create', compact('users'));
     }
 
     /**
@@ -30,7 +54,29 @@ class BorrowingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validatedData = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'borrow_date' => 'required|date',
+            'return_date' => 'required|date|after:borrow_date',
+            'book_title' => 'required|string',
+            'author' => 'required|string',
+            'release_year' => 'required|string',
+        ]);
+
+
+        Borrowing::create([
+            'user_id' => $validatedData['user_id'],
+            'book_title' => $validatedData['book_title'],
+            'release_year' => $validatedData['release_year'],
+            'author' => $validatedData['author'],
+            'borrow_date' => $validatedData['borrow_date'],
+            'return_date' => $validatedData['return_date'],
+            'status' => 'PENDING',
+        ]);
+
+
+        return redirect()->route('peminjaman-buku.index')->with('success', 'Peminjaman buku berhasil ditambahkan.');
     }
 
     /**
@@ -38,7 +84,13 @@ class BorrowingController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $borrowing = Borrowing::findOrFail($id);
+        $fines = Fine::findOrFail($id);
+
+        $users = User::all();
+
+
+        return view('borrowing.show', compact('borrowing', 'users', 'fines'));
     }
 
     /**
@@ -46,22 +98,55 @@ class BorrowingController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $borrowing = Borrowing::findOrFail($id);
+        $users = User::all();
+
+        return view('borrowing.edit', compact('borrowing', 'users'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+   /**
+ * Update the specified resource in storage.
+ */
+public function update(Request $request, string $id)
+{
+    $validatedData = $request->validate([
+        // 'user_id' => 'required|exists:users,id',
+        // 'borrow_date' => 'required|date',
+        // 'return_date' => 'required|date|after:borrow_date',
+        // 'book_title' => 'required|string',
+        // 'author' => 'required|string',
+        // 'release_year' => 'required|string',
+        'status' => 'required',
+        'description' => 'nullable|string',
+    ]);
+
+    $borrowing = Borrowing::findOrFail($id);
+
+    // $borrowing->user_id = $validatedData['user_id'];
+    // $borrowing->borrow_date = $validatedData['borrow_date'];
+    // $borrowing->return_date = $validatedData['return_date'];
+    // $borrowing->book_title = $validatedData['book_title'];
+    // $borrowing->author = $validatedData['author'];
+    // $borrowing->release_year = $validatedData['release_year'];
+    $borrowing->status = $validatedData['status'];
+    $borrowing->description = $validatedData['description'];
+
+    $borrowing->save();
+
+    return redirect()->route('peminjaman-buku.index')
+        ->with('success', 'Data peminjaman buku berhasil diperbarui.');
+}
+
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
-        //
+        $peminjaman = Borrowing::findOrFail($id);
+        $peminjaman->delete();
+
+        return redirect()->route('peminjaman-buku.index')
+            ->with('success', 'Data peminjaman buku berhasil dihapus.');
     }
 }
