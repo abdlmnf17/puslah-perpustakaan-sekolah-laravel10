@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
+        Schema::create('return_books', function (Blueprint $table) {
             $table->id();
-            $table->string('webname');
-            $table->string('description');
-            $table->string('logo')->nullable();
-            $table->string('favicon')->nullable();
+            $table->foreignId('borrow_id')->constrained('borrowings');
+            $table->string('status')->nullable();;
+            $table->string('description')->nullable();;
+            $table->string('photo')->nullable();;
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::dropIfExists('return_books');
     }
 };

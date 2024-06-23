@@ -5,14 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Setting extends Model
+class Return_Book extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'webname',
-        'description',
-        'logo',
-        'favicon',
-
-    ];
 }
