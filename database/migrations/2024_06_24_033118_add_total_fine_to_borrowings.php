@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('fines', function (Blueprint $table) {
-            $table->decimal('total', 10, 2)->default(0.00)->after('description');
+        Schema::table('borrowings', function (Blueprint $table) {
+            $table->decimal('total_fine', 10, 2)->default(0.00)->after('description');
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('fines', function (Blueprint $table) {
-            $table->decimal('total', 10, 2)->default(0.00)->after('description');
+        Schema::table('borrowings', function (Blueprint $table) {
+            $table->decimal('total_fine', 10, 2)->default(0.00)->after('description');
         });
     }
 };

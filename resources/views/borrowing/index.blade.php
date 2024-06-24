@@ -11,7 +11,8 @@
 
             <div class="p-4 sm:p-6 dark:bg-gray-900 border-b border-gray-200">
 
-                <div class="mb-4 flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                <div
+                    class="mb-4 flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 sm:space-x-4">
                     <x-secondary-button href="{{ route('peminjaman-buku.create') }}">
                         Tambah
                     </x-secondary-button>
@@ -75,62 +76,63 @@
                             </thead>
                             <tbody class="bg-white divide-y divide-gray-200">
                                 @forelse ($peminjaman as $item)
-                                <tr>
-                                    <td
-                                        class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">{{ $item->id }}</td>
-                                    <td
-                                        class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">{{ $item->user->name }}</td>
-                                    <td
-                                        class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">{{ $item->book_title }}</td>
-                                    <td
-                                        class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">{{ $item->description }}</td>
-                                    <td
-                                        class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">{{ $item->status }}</td>
-                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900 flex space-x-2">
-                                        <a href="{{ route('peminjaman-buku.edit', $item->id) }}"
-                                            class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                    <tr>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                                            {{ $item->borrow_number }}
+                                        </td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                                            {{ $item->user->name }}</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                                            {{ $item->book_title }}</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                                            {{ $item->description }}</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
+                                            {{ $item->status }}</td>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900 flex space-x-2">
+                                            <a href="{{ route('peminjaman-buku.edit', $item->id) }}"
+                                                class="text-indigo-600 hover:text-indigo-900">Edit</a>
 
-                                        <x-confirm-delete-modal>
-                                            <x-slot name="trigger">
-                                                <button @click="isOpen = true"
-                                                    class="text-red-600 hover:text-red-900">Hapus</button>
-                                            </x-slot>
+                                            <x-confirm-delete-modal>
+                                                <x-slot name="trigger">
+                                                    <button @click="isOpen = true"
+                                                        class="text-red-600 hover:text-red-900">Hapus</button>
+                                                </x-slot>
 
-                                            <x-slot name="title">
-                                                Konfirmasi Hapus
-                                            </x-slot>
+                                                <x-slot name="title">
+                                                    Konfirmasi Hapus
+                                                </x-slot>
 
-                                            <x-slot name="content">
-                                                Apakah Anda yakin ingin menghapus peminjaman ini?
-                                            </x-slot>
+                                                <x-slot name="content">
+                                                    Apakah Anda yakin ingin menghapus peminjaman ini?
+                                                </x-slot>
 
-                                            <x-slot name="footer">
-                                                <form id="deleteForm-{{ $item->id }}"
-                                                    action="{{ route('peminjaman-buku.destroy', $item->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <x-primary-button type="submit"
-                                                        class="bg-red-600 hover:bg-red-700">
-                                                        Hapus
-                                                    </x-primary-button>
-                                                    <x-secondary-button @click="isOpen = false">
-                                                        Batal
-                                                    </x-secondary-button>
-                                                </form>
+                                                <x-slot name="footer">
+                                                    <form id="deleteForm-{{ $item->id }}"
+                                                        action="{{ route('peminjaman-buku.destroy', $item->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <x-primary-button type="submit"
+                                                            class="bg-red-600 hover:bg-red-700">
+                                                            Hapus
+                                                        </x-primary-button>
+                                                        <x-secondary-button @click="isOpen = false">
+                                                            Batal
+                                                        </x-secondary-button>
+                                                    </form>
 
-                                            </x-slot>
-                                        </x-confirm-delete-modal>
+                                                </x-slot>
+                                            </x-confirm-delete-modal>
 
-                                        <a href="{{ route('peminjaman-buku.show', $item->id) }}"
-                                            class="text-gray-600 hover:text-gray-900">Detail</a>
-                                    </td>
-                                </tr>
+                                            <a href="{{ route('peminjaman-buku.show', $item->id) }}"
+                                                class="text-gray-600 hover:text-gray-900">Detail</a>
+                                        </td>
+                                    </tr>
                                 @empty
-                                <tr>
-                                    <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500"
-                                        colspan="6">Tidak ada data yang ditemukan.</td>
-                                </tr>
+                                    <tr>
+                                        <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-500" colspan="6">
+                                            Tidak ada data yang ditemukan.</td>
+                                    </tr>
                                 @endforelse
                             </tbody>
                         </table>

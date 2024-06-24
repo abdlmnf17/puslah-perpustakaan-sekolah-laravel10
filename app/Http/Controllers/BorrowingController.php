@@ -73,6 +73,8 @@ class BorrowingController extends Controller
             'borrow_date' => $validatedData['borrow_date'],
             'return_date' => $validatedData['return_date'],
             'status' => 'PENDING',
+            'description' => 'Menunggu Persetujuan Admin',
+            'total_fine' => 0.00,
         ]);
 
 
@@ -85,10 +87,10 @@ class BorrowingController extends Controller
     public function show(string $id)
     {
         $borrowing = Borrowing::findOrFail($id);
-        $fines = Fine::findOrFail($id);
+        // Ambil fine yang terkait dengan peminjaman ini
+        $fines = $borrowing->fine; // asumsikan ada relasi fine di model Borrowing
 
         $users = User::all();
-
 
         return view('borrowing.show', compact('borrowing', 'users', 'fines'));
     }
@@ -104,38 +106,40 @@ class BorrowingController extends Controller
         return view('borrowing.edit', compact('borrowing', 'users'));
     }
 
-   /**
- * Update the specified resource in storage.
- */
-public function update(Request $request, string $id)
-{
-    $validatedData = $request->validate([
-        // 'user_id' => 'required|exists:users,id',
-        // 'borrow_date' => 'required|date',
-        // 'return_date' => 'required|date|after:borrow_date',
-        // 'book_title' => 'required|string',
-        // 'author' => 'required|string',
-        // 'release_year' => 'required|string',
-        'status' => 'required',
-        'description' => 'nullable|string',
-    ]);
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        $validatedData = $request->validate([
+            // 'user_id' => 'required|exists:users,id',
+            // 'borrow_date' => 'required|date',
+            // 'return_date' => 'required|date|after:borrow_date',
+            // 'book_title' => 'required|string',
+            // 'author' => 'required|string',
+            // 'release_year' => 'required|string',
+            'status' => 'required',
+            'description' => 'nullable|string',
+            'total_fine' => 'required|numeric',
+        ]);
 
-    $borrowing = Borrowing::findOrFail($id);
+        $borrowing = Borrowing::findOrFail($id);
 
-    // $borrowing->user_id = $validatedData['user_id'];
-    // $borrowing->borrow_date = $validatedData['borrow_date'];
-    // $borrowing->return_date = $validatedData['return_date'];
-    // $borrowing->book_title = $validatedData['book_title'];
-    // $borrowing->author = $validatedData['author'];
-    // $borrowing->release_year = $validatedData['release_year'];
-    $borrowing->status = $validatedData['status'];
-    $borrowing->description = $validatedData['description'];
+        // $borrowing->user_id = $validatedData['user_id'];
+        // $borrowing->borrow_date = $validatedData['borrow_date'];
+        // $borrowing->return_date = $validatedData['return_date'];
+        // $borrowing->book_title = $validatedData['book_title'];
+        // $borrowing->author = $validatedData['author'];
+        // $borrowing->release_year = $validatedData['release_year'];
+        $borrowing->status = $validatedData['status'];
+        $borrowing->description = $validatedData['description'];
+        $borrowing->description = $validatedData['total_fine'];
 
-    $borrowing->save();
+        $borrowing->save();
 
-    return redirect()->route('peminjaman-buku.index')
-        ->with('success', 'Data peminjaman buku berhasil diperbarui.');
-}
+        return redirect()->route('peminjaman-buku.index')
+            ->with('success', 'Data peminjaman buku berhasil diperbarui.');
+    }
 
 
     /**

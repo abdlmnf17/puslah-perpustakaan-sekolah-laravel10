@@ -23,6 +23,16 @@
     </div>
 
     <div class="mb-4">
+        <x-input-label for="total_fine">{{ __('Jumlah Denda Keterlambatan') }}</x-input-label>
+        <x-text-input id="total_fine" class="mt-1 block w-full" type="number" name="total_fine"
+        value="{{ old('total_fine') }}" required />
+
+        @error('total_fine')
+            <x-input-error-set :message="$message" class="mt-2" />
+        @enderror
+    </div>
+
+    <div class="mb-4">
         <x-input-label for="description">{{ __('Keterangan') }}</x-input-label>
         <textarea id="description" name="description"
             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">{{ $borrowing->description }}</textarea>

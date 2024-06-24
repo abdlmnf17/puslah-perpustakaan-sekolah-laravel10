@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Detail Pinjaman Buku') }}
+            {{ __('Detail Pinjaman Buku') }} - {{ $borrowing->borrow_number }}
         </h2>
     </x-slot>
 
@@ -10,6 +10,10 @@
             <div class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700">
                 <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-700">
+                        <tr>
+                            <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Nomor Peminjaman</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->borrow_number }}</td>
+                        </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Peminjam</td>
                             <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->user->name }}</td>
@@ -44,7 +48,7 @@
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Denda</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $fines->total }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->total_fine }}</td>
                         </tr>
 
                     </tbody>
