@@ -18,15 +18,15 @@ class SettingsController extends Controller
     public function update(Request $request)
     {
         $request->validate([
-            'nama_web' => 'required|string|max:30',
-            'deskripsi' => 'nullable|string|max:220',
+            'webname' => 'required|string|max:30',
+            'description' => 'nullable|string|max:220',
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi untuk file logo
             'favicon' => 'nullable|mimes:ico|max:2048', // Validasi untuk file favicon
         ], [
-            'nama_web.required' => 'Nama harus diisi.',
-            'nama_web.string' => 'Nama  harus berupa teks.',
-            'nama_web.max' => 'Nama tidak boleh lebih dari :max karakter.',
-            'deskripsi.max' => 'Deskripsi tidak boleh lebih dari :max karakter.',
+            'webname.required' => 'Nama harus diisi.',
+            'webname.string' => 'Nama  harus berupa teks.',
+            'webname.max' => 'Nama tidak boleh lebih dari :max karakter.',
+            'description.max' => 'description tidak boleh lebih dari :max karakter.',
             'logo.image' => 'Logo harus berupa file gambar.',
             'logo.mimes' => 'Logo harus dalam format jpeg, png, jpg, atau gif.',
             'logo.max' => 'Ukuran logo tidak boleh lebih dari :max kilobyte.',
@@ -40,13 +40,13 @@ class SettingsController extends Controller
             throw new \Exception('Pengaturan tidak ditemukan.');
         }
 
-        $setting->nama_web = $request->input('nama_web');
-        $setting->deskripsi = $request->input('deskripsi');
+        $setting->webname = $request->input('webname');
+        $setting->description = $request->input('description');
 
         // Handle unggah logo jika ada file yang diunggah
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
-            $logoPath = $logo->store('logo', 'public'); // Simpan file logo di folder 'public/logos'
+            $logoPath = $logo->storeAs('logo', 'logo.png', 'public'); // Simpan file logo di folder 'public/logos'
 
             // Hapus logo lama jika ada
             if ($setting->logo) {
@@ -69,7 +69,7 @@ class SettingsController extends Controller
         }
 
         // Simpan path favicon yang baru di database
-        $setting->favicon = 'favicons/favicon.ico'; // Simpan path relatif ke favicon.ico di folder 'public/favicons'
+        $setting->favicon = $faviconPath; // Simpan path relatif ke favicon.ico di folder 'public/favicons'
     }
 
         $setting->save();

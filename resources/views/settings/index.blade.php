@@ -1,4 +1,4 @@
-<title>{{config('app.titleSettings', 'Laravel')}} - {{$settings->nama_web}} </title>
+<title>{{config('app.titleSettings', 'Laravel')}} - {{$settings->webname}} </title>
 
 <x-app-layout>
     <x-slot name="header">

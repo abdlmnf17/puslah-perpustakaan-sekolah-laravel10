@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
-            $table->id();
-            $table->string('webname');
-            $table->string('description');
-            $table->string('logo')->nullable();
-            $table->string('favicon')->nullable();
-            $table->timestamps();
+        Schema::table('borrowings', function (Blueprint $table) {
+         $table->string('borrow_number')->default(0.00)->after('id');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('settings');
+        Schema::table('borrowings', function (Blueprint $table) {
+            $table->string('borrow_number')->default(0.00)->after('id');
+        });
     }
 };

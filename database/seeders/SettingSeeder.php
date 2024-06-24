@@ -14,8 +14,8 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         DB::table('settings')->insert([
-            'nama_web' => 'SMKN 1 KARAWANG',
-            'deskripsi' => 'PUSLAH - Perpustakaan Sekolah',
+            'webname' => 'SMKN 1 KARAWANG',
+            'description' => 'PUSLAH - Perpustakaan Sekolah',
             'created_at' => now(),
             'updated_at' => now(),
         ]);
