@@ -1,3 +1,62 @@
+# Aplikasi Pengelolaan Perpustakaan Sekolah Berbasis Laravel 10
+
+## Instalasi Tools (Localhost)
+
+- Git
+- CMD / Terminal
+- VSCODE / Text Editor lain
+- XAMPP (PHP 8.1 - 8.2) / Laragon (PHP 8.1 - 8.2)
+- Composer
+
+## Cara Pasang
+
+1. Clone projek melalui terminal / command prompt / git bash dengan perintah:
+   ```bash
+   git clone abdlmnf17/puslah-perpustakaan-sekolah-laravel10.git
+   ```
+
+2. Pindahkan folder hasil clone ke direktori Xampp/htdocs/disini jika memakai xampp dan ke /laragon/www/disini jka memakai laragon.
+
+3. Buka Vscode, buka folder dan pilih projek yang tadi sudah di-clone.
+
+4. Buka terminal di Vscode, ketik `composer install`, lalu tunggu sampai selesai.
+5. Pastikan sukses dan berhasil 
+
+6. Setelah itu cari file env.example paling bawah, copy dan paste di tempat itu juga, lalu ubah namanya env.examplecopy menjadi`.env`, lalu ketik di terminal `php artisan key:generate`,
+
+7. Masuk ke dalam .env dan ubah bagian `DB_DATABASE=`, menjadi nama database yang akan digunakan, contohnya `DB_DATABASE=puslah`. Lalu setelah itu ketik `php artisan config:cache`.
+
+8. Buka phpMyAdmin, buat database baru berdasarkan nama yang ada di `.env`, yaitu `puslah`.
+
+9. Kembali ke Vscode, tambahkan terminal baru, ketik `php artisan migrate`, dan tunggu migrasi sampai selesai.
+
+10. Setelah itu, instalasi user admin dengan seeder. Buka folder `database/seeder/AdminSeeder.php` dan `database/seeder/KepalaSeeder.php`.
+
+11. Ubah informasi admin dan kepala sekolah, seperti nama, email, dan password.
+
+12. Jalankan perintah di terminal Vscode:
+    ```bash
+    php artisan db:seed
+    ```
+
+13. Tunggu sampai selesai. Setelah itu, ketik `php artisan config:cache`.
+
+14. Setelah selesai, ketik `php artisan serve`.
+
+15. Selesai! Buka link [localhost:8000](http://localhost:8000) dan login sebagai admin.
+
+## Fitur-Fitur
+
+- Peminjaman Buku oleh siswa
+- Pengembalian Buku oleh siswa
+- Cetak Laporan
+- dll...
+
+<br/>
+
+## Projek ini dibuat dengan Laravel 10
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

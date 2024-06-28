@@ -23,9 +23,9 @@
     </div>
 
     <div class="mb-4">
-        <x-input-label for="total_fine">{{ __('Jumlah Denda Keterlambatan') }}</x-input-label>
+        <x-input-label for="total_fine">{{ __('Jumlah Denda Keterlambatan') }} (Masukan 0 jika tidak ada)</x-input-label>
         <x-text-input id="total_fine" class="mt-1 block w-full" type="number" name="total_fine"
-        value="{{ old('total_fine') }}" required />
+        value="{{ old('total_fine') }}" required/>
 
         @error('total_fine')
             <x-input-error-set :message="$message" class="mt-2" />

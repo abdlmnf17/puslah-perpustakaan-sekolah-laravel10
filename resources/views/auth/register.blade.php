@@ -44,10 +44,7 @@
         <!-- Role -->
         <div class="mt-4">
             <x-input-label for="role" :value="__('Daftar Sebagai')" />
-            <select id="role" name="role" class="block mt-1 w-full">
-                <option value="siswa">Siswa</option>
-                <!-- Add other options if needed -->
-            </select>
+            <x-text-input id="role" class="block mt-1 w-full" type="text" name="role" value="siswa" readonly />
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>
 
