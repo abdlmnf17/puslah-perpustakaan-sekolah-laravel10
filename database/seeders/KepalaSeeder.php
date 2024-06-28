@@ -17,7 +17,7 @@ class KepalaSeeder extends Seeder
         User::create([
             'name' => 'Kepala Sekolah',
             'email' => 'kepalasekolah@gmail.com',
-            'role' => 'kepala',
+            'role' => 'admin',
             'identity' => '222222', //masukan NIP
             'adress' => 'Karawang', //masukan alamat
             'password' => Hash::make('password'),

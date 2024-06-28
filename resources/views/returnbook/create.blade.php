@@ -1,4 +1,4 @@
-<title>Tambah Peminjaman Buku</title>
+<title>Tambah Pengembalian Buku</title>
 
 <x-app-layout>
     <x-slot name="header">

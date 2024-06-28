@@ -19,7 +19,8 @@ return [
 
 
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Perpustakaan Sekolah'),
+
     'titleSettings' => 'Pengaturan',
     'titleProfil' => 'Profil',
     'titleEditProfile' => 'Edit Profil',
