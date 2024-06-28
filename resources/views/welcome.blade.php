@@ -10,7 +10,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset(Storage::url($setting->favicon ?? 'favicons/favicon.ico')) }}" type="image/x-icon">
     <!-- Styles -->
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="/assets/app.css">
 
 </head>
 <body class="antialiased bg-gray-900 text-gray-100">
@@ -59,4 +59,5 @@
         </div>
     </div>
 </body>
+<script src="/assets/app.js"></script>
 </html>
