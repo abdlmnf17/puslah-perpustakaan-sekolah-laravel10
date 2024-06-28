@@ -12,7 +12,7 @@
 
 1. Clone projek melalui terminal / command prompt / git bash dengan perintah:
    ```bash
-   git clone abdlmnf17/puslah-perpustakaan-sekolah-laravel10.git
+   git clone https://github.com/abdlmnf17/puslah-perpustakaan-sekolah-laravel10.git
    ```
 
 2. Pindahkan folder hasil clone ke direktori Xampp/htdocs/disini jika memakai xampp dan ke /laragon/www/disini jka memakai laragon.
@@ -39,7 +39,7 @@
     php artisan db:seed
     ```
 
-13. Tunggu sampai selesai. Setelah itu, ketik `php artisan config:cache`.
+13. Tunggu sampai selesai. Setelah itu, ketik `php artisan storage:link` , lalu ketik `php artisan config:cache`.
 
 14. Setelah selesai, ketik `php artisan serve`.
 
