@@ -39,7 +39,7 @@
     php artisan db:seed
     ```
 
-13. Tunggu sampai selesai. Setelah itu, ketik `php artisan config:cache`.
+13. Tunggu sampai selesai. Setelah itu, ketik `php artisan storage:link` , lalu ketik `php artisan config:cache`.
 
 14. Setelah selesai, ketik `php artisan serve`.
 
