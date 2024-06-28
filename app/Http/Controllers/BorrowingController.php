@@ -16,13 +16,18 @@ class BorrowingController extends Controller
     public function index(Request $request)
     {
         $settings = Setting::first();
-
         $peminjaman = Borrowing::query();
+
+        // Filter peminjaman sesuai dengan role pengguna
+        if (auth()->user()->role === 'siswa') {
+            $peminjaman->where('user_id', auth()->user()->id);
+        }
 
         if ($request->has('search') && !empty($request->search)) {
             $searchTerm = $request->search;
             $peminjaman->where('book_title', 'like', '%' . $searchTerm . '%');
         }
+
         if ($request->has('name') && !empty($request->name)) {
             $searchTermName = $request->name;
             $peminjaman->whereHas('user', function ($query) use ($searchTermName) {
@@ -39,6 +44,7 @@ class BorrowingController extends Controller
 
         return view('borrowing.index', compact('peminjaman'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -133,7 +139,7 @@ class BorrowingController extends Controller
         // $borrowing->release_year = $validatedData['release_year'];
         $borrowing->status = $validatedData['status'];
         $borrowing->description = $validatedData['description'];
-        $borrowing->description = $validatedData['total_fine'];
+        $borrowing->total_fine = $validatedData['total_fine'];
 
         $borrowing->save();
 
@@ -153,4 +159,6 @@ class BorrowingController extends Controller
         return redirect()->route('peminjaman-buku.index')
             ->with('success', 'Data peminjaman buku berhasil dihapus.');
     }
+
+    
 }

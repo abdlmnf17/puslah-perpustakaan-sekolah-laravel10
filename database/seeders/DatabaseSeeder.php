@@ -7,6 +7,8 @@ namespace Database\Seeders;
 use App\Models\Setting;
 use Illuminate\Database\Seeder;
 
+
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -16,6 +18,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             SettingSeeder::class,
+        ]);
+        $this->call([
+            AdminSeeder::class,
+        ]);
+        $this->call([
+            KepalaSeeder::class,
         ]);
     }
 }

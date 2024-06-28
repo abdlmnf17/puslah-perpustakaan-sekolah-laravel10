@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fines', function (Blueprint $table) {
+        Schema::create('returbooks', function (Blueprint $table) {
             $table->id();
             $table->foreignId('borrowing_id')->constrained('borrowings');
-            $table->string('description');
+            $table->string('status')->nullable();;
+            $table->string('description')->nullable();;
+            $table->string('photo')->nullable();;
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fines');
+        Schema::dropIfExists('returbooks');
     }
 };
