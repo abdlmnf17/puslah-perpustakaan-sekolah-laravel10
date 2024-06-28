@@ -39,6 +39,11 @@
                         {{ __('Pengaturan') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('laporan.index')" :active="request()->routeIs('laporan.index')">
+                        {{ __('Laporan') }}
+                    </x-nav-link>
+                </div>
                 @endif
             </div>
 
@@ -125,6 +130,9 @@
                 @if ($role === 'admin')
                 <x-responsive-nav-link :href="route('settings.index')">
                     {{ __('Settings') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('laporan.index')">
+                    {{ __('Laporan') }}
                 </x-responsive-nav-link>
                 @endif
 

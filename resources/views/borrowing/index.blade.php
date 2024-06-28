@@ -1,3 +1,4 @@
+<title>Peminjaman Buku</title>
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
@@ -5,13 +6,13 @@
         </h2>
     </x-slot>
 
-    <div class="py-6 px-4 sm:px-6 lg:px-8">
+    <div class="py-6 px-4 sm:px-6 lg:px-6">
         <div class="dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg">
             @include('alert.alert-info')
 
             <div class="p-4 sm:p-6 dark:bg-gray-900 border-b border-gray-200">
 
-               
+
                 <div class="flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 sm:space-x-4">
                     <x-secondary-button href="{{ route('peminjaman-buku.create') }}">
                         Tambah
