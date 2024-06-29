@@ -11,7 +11,7 @@
                     <a href="{{ route('dashboard') }}" class="flex items-center">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                         <div class="ml-2">
-                            <div class="font-bold">{{ App\Models\Setting::first()->webname }}</div>
+                            <div class="font-bold text-sm text-gray-500 dark:text-gray-200">{{ App\Models\Setting::first()->webname }}</div>
                             <div class="text-sm text-gray-500">{{ App\Models\Setting::first()->description }}</div>
                         </div>
                     </a>
