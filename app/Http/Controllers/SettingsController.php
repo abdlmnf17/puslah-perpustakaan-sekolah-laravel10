@@ -46,7 +46,7 @@ class SettingsController extends Controller
         // Handle unggah logo jika ada file yang diunggah
         if ($request->hasFile('logo')) {
             $logo = $request->file('logo');
-            $logoPath = $logo->storeAs('logo', 'logo.png', 'public'); // Simpan file logo di folder 'public/logos'
+            $logoPath = $logo->store('logos', 'public'); // Simpan file logo di folder 'public/logos'
 
             // Hapus logo lama jika ada
             if ($setting->logo) {
@@ -57,8 +57,6 @@ class SettingsController extends Controller
             $setting->logo = $logoPath;
         }
 
-        // Handle unggah favicon jika ada file yang diunggah
-        // Handle unggah favicon jika ada file yang diunggah
     if ($request->hasFile('favicon')) {
         $favicon = $request->file('favicon');
         $faviconPath = $favicon->storeAs('favicons', 'favicon.ico', 'public'); // Simpan file favicon dengan nama favicon.ico di folder 'public/favicons'
