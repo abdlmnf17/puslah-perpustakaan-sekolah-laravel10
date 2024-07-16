@@ -2,7 +2,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Detail Pengembalian Buku') }} - {{ $pengembalian->borrowing->borrow_number }}
+            {{ __('Detail Pengembalian Buku') }} - {{ $pengembalian->peminjaman->no_peminjaman }}
         </h2>
     </x-slot>
 
@@ -22,31 +22,31 @@
 
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Nomor Peminjaman</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->borrowing->borrow_number }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->peminjaman->no_peminjaman }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Peminjam</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->borrowing->user->name }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->peminjaman->user->nama }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Judul Buku</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->borrowing->book_title }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->peminjaman->buku->nama_buku }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Pengarang</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->borrowing->author }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->peminjaman->buku->penulis }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Tahun Terbit</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->borrowing->release_year }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->peminjaman->buku->tahun_rilis }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Tanggal Pinjam</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->borrowing->borrow_date }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->peminjaman->tgl_peminjaman }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Rencana Tanggal Kembali</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->borrowing->return_date }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->peminjaman->tgl_pengembalian }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Tanggal Input Kembali</td>
@@ -58,11 +58,11 @@
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Keterangan</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->description }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->deskripsi }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Denda Keterlambatan</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->borrowing->total_fine }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $pengembalian->peminjaman->total_denda }}</td>
                         </tr>
 
                     </tbody>

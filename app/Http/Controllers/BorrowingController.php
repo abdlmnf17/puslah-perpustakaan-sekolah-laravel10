@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Borrowing;
+use App\Models\Peminjaman;
 use App\Models\Setting;
 use App\Models\User;
-use App\Models\Fine;
+use App\Models\Buku;
+
 
 class BorrowingController extends Controller
 {
@@ -16,7 +17,7 @@ class BorrowingController extends Controller
     public function index(Request $request)
     {
         $settings = Setting::first();
-        $peminjaman = Borrowing::query();
+        $peminjaman = Peminjaman::query();
 
         // Filter peminjaman sesuai dengan role pengguna
         if (auth()->user()->role === 'siswa') {
@@ -25,13 +26,16 @@ class BorrowingController extends Controller
 
         if ($request->has('search') && !empty($request->search)) {
             $searchTerm = $request->search;
-            $peminjaman->where('book_title', 'like', '%' . $searchTerm . '%');
+            $peminjaman->whereHas('buku', function ($query) use ($searchTerm) {
+                $query->where('nama_buku', 'like', '%' . $searchTerm . '%');
+            });
         }
+
 
         if ($request->has('name') && !empty($request->name)) {
             $searchTermName = $request->name;
             $peminjaman->whereHas('user', function ($query) use ($searchTermName) {
-                $query->where('name', 'like', '%' . $searchTermName . '%');
+                $query->where('nama', 'like', '%' . $searchTermName . '%');
             });
         }
 
@@ -52,7 +56,8 @@ class BorrowingController extends Controller
     public function create()
     {
         $users = User::all();
-        return view('borrowing.create', compact('users'));
+        $buku = Buku::all();
+        return view('borrowing.create', compact('users', 'buku'));
     }
 
     /**
@@ -63,24 +68,23 @@ class BorrowingController extends Controller
 
         $validatedData = $request->validate([
             'user_id' => 'required|exists:users,id',
+            'book_id' => 'required|exists:buku,id',
             'borrow_date' => 'required|date',
             'return_date' => 'required|date|after:borrow_date',
-            'book_title' => 'required|string',
-            'author' => 'required|string',
-            'release_year' => 'required|string',
+            // 'book_title' => 'required|string',
+            // 'author' => 'required|string',
+            // 'release_year' => 'required|string',
         ]);
 
 
-        Borrowing::create([
+        Peminjaman::create([
             'user_id' => $validatedData['user_id'],
-            'book_title' => $validatedData['book_title'],
-            'release_year' => $validatedData['release_year'],
-            'author' => $validatedData['author'],
-            'borrow_date' => $validatedData['borrow_date'],
-            'return_date' => $validatedData['return_date'],
+            'buku_id' => $validatedData['book_id'],
+            'tgl_peminjaman' => $validatedData['borrow_date'],
+            'tgl_pengembalian' => $validatedData['return_date'],
             'status' => 'PENDING',
-            'description' => 'Menunggu Persetujuan Admin',
-            'total_fine' => 0.00,
+            'deskripsi' => 'Menunggu Persetujuan Admin',
+            'total_denda' => 0.00,
         ]);
 
 
@@ -92,9 +96,8 @@ class BorrowingController extends Controller
      */
     public function show(string $id)
     {
-        $borrowing = Borrowing::findOrFail($id);
-        // Ambil fine yang terkait dengan peminjaman ini
-        $fines = $borrowing->fine; // asumsikan ada relasi fine di model Borrowing
+        $borrowing = Peminjaman::findOrFail($id);
+        $fines = $borrowing->denda;
 
         $users = User::all();
 
@@ -106,7 +109,7 @@ class BorrowingController extends Controller
      */
     public function edit(string $id)
     {
-        $borrowing = Borrowing::findOrFail($id);
+        $borrowing = Peminjaman::findOrFail($id);
         $users = User::all();
 
         return view('borrowing.edit', compact('borrowing', 'users'));
@@ -129,7 +132,7 @@ class BorrowingController extends Controller
             'total_fine' => 'required|numeric',
         ]);
 
-        $borrowing = Borrowing::findOrFail($id);
+        $borrowing = Peminjaman::findOrFail($id);
 
         // $borrowing->user_id = $validatedData['user_id'];
         // $borrowing->borrow_date = $validatedData['borrow_date'];
@@ -138,8 +141,8 @@ class BorrowingController extends Controller
         // $borrowing->author = $validatedData['author'];
         // $borrowing->release_year = $validatedData['release_year'];
         $borrowing->status = $validatedData['status'];
-        $borrowing->description = $validatedData['description'];
-        $borrowing->total_fine = $validatedData['total_fine'];
+        $borrowing->deskripsi = $validatedData['description'];
+        $borrowing->total_denda = $validatedData['total_fine'];
 
         $borrowing->save();
 
@@ -153,12 +156,12 @@ class BorrowingController extends Controller
      */
     public function destroy(string $id)
     {
-        $peminjaman = Borrowing::findOrFail($id);
+        $peminjaman = Peminjaman::findOrFail($id);
         $peminjaman->delete();
 
         return redirect()->route('peminjaman-buku.index')
             ->with('success', 'Data peminjaman buku berhasil dihapus.');
     }
 
-    
+
 }

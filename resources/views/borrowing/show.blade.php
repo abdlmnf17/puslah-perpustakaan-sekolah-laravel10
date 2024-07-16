@@ -13,31 +13,31 @@
                     <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-700">
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Nomor Peminjaman</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->borrow_number }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->no_peminjaman }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Peminjam</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->user->name }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->user->nama }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Judul Buku</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->book_title }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->buku->nama_buku }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Pengarang</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->author }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->buku->penulis }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Tahun Terbit</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->release_year }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->buku->tahun_rilis }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Tanggal Pinjam</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->borrow_date }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->tgl_peminjaman }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Tanggal Kembali</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->return_date }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->tgl_pengembalian }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Status</td>
@@ -45,11 +45,11 @@
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Keterangan</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->description }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->deskripsi }}</td>
                         </tr>
                         <tr>
                             <td class="px-6 py-4 text-sm font-medium text-gray-500 dark:text-gray-400 uppercase">Denda</td>
-                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->total_fine }}</td>
+                            <td class="px-6 py-4 text-lg text-gray-900 dark:text-white">{{ $borrowing->total_denda }}</td>
                         </tr>
 
                     </tbody>

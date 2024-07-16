@@ -6,7 +6,7 @@
             <option value="" selected disabled>Pilih Peminjaman</option>
             @foreach ($peminjaman as $p)
                 <option value="{{ $p->id }}" {{ old('borrowing_id') == $p->id ? 'selected' : '' }}>
-                    Peminjaman ID {{ $p->id }} - {{ $p->book_title }}
+                    Peminjaman ID {{ $p->id }} - {{ $p->buku->nama_buku }}
                 </option>
             @endforeach
         </select>

@@ -15,11 +15,11 @@ class KepalaSeeder extends Seeder
     public function run(): void
     {
         User::create([
-            'name' => 'Kepala Sekolah',
+            'nama' => 'Kepala Sekolah',
             'email' => 'kepalasekolah@gmail.com',
             'role' => 'admin',
-            'identity' => '222222', //masukan NIP
-            'adress' => 'Karawang', //masukan alamat
+            'identitas' => '222222', //masukan NIP
+            'alamat' => 'Karawang', //masukan alamat
             'password' => Hash::make('password'),
             'created_at' => now(),
             'updated_at' => now(),

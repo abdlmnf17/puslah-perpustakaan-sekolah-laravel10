@@ -18,9 +18,9 @@
 
         <!-- Identity (NIP, NIK, NIS) -->
         <div class="mt-4">
-            <x-input-label for="identity" :value="__('Identitas (NIS)')" />
-            <x-text-input id="identity" class="block mt-1 w-full" type="number" name="identity" :value="old('identity')" required />
-            <x-input-error :messages="$errors->get('identity')" class="mt-2" />
+            <x-input-label for="identitas" :value="__('Identitas (NIS)')" />
+            <x-text-input id="identitas" class="block mt-1 w-full" type="number" name="identitas" :value="old('identitas')" required />
+            <x-input-error :messages="$errors->get('identitas')" class="mt-2" />
         </div>
         <div class="mt-4">
             <x-input-label for="telepon" :value="__('No HP')" />

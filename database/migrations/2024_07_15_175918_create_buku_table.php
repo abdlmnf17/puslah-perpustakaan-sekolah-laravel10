@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('borrowings', function (Blueprint $table) {
-            $table->decimal('total_fine', 10, 2)->default(0.00)->after('description');
+        Schema::create('buku', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama_buku');
+            $table->string('penulis');
+            $table->string('tahun_rilis')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('borrowings', function (Blueprint $table) {
-            $table->decimal('total_fine', 10, 2)->default(0.00)->after('description');
-        });
+        Schema::dropIfExists('buku');
     }
 };

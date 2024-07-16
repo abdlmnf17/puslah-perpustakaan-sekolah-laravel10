@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Returbook;
+use App\Models\Returbuku;
 use App\Models\Setting;
 use App\Models\User;
-use App\Models\Borrowing;
+use App\Models\Peminjaman;
 
 class ReturnBookController extends Controller
 {
@@ -14,25 +14,26 @@ class ReturnBookController extends Controller
     {
 
         $settings = Setting::first();
-        $pengembalian = Returbook::query();
+        $pengembalian = Returbuku::query();
 
         if (auth()->user()->role === 'siswa') {
-            $pengembalian->whereHas('borrowing', function ($query) {
+            $pengembalian->whereHas('peminjaman', function ($query) {
                 $query->where('user_id', auth()->user()->id);
             });
         }
 
         if ($request->has('search') && !empty($request->search)) {
             $searchTerm = $request->search;
-            $pengembalian->whereHas('borrowing', function ($query) use ($searchTerm) {
-                $query->where('book_title', 'like', '%' . $searchTerm . '%');
+            $pengembalian->whereHas('peminjaman.buku', function ($query) use ($searchTerm) {
+                $query->where('nama_buku', 'like', '%' . $searchTerm . '%');
             });
         }
 
+
         if ($request->has('name') && !empty($request->name)) {
             $searchTermName = $request->name;
-            $pengembalian->whereHas('borrowing.user', function ($query) use ($searchTermName) {
-                $query->where('name', 'like', '%' . $searchTermName . '%');
+            $pengembalian->whereHas('peminjaman.user', function ($query) use ($searchTermName) {
+                $query->where('nama', 'like', '%' . $searchTermName . '%');
             });
         }
 
@@ -41,7 +42,7 @@ class ReturnBookController extends Controller
             $pengembalian->where('status', $status);
         }
 
-        $pengembalian = $pengembalian->get(); // Ambil semua data yang telah difilter
+        $pengembalian = $pengembalian->get();
 
         return view('returnbook.index', compact('pengembalian'));
     }
@@ -51,7 +52,7 @@ class ReturnBookController extends Controller
         $user = auth()->user();
 
 
-        $peminjaman = Borrowing::where('user_id', $user->id)->get();
+        $peminjaman = Peminjaman::where('user_id', $user->id)->get();
 
         return view('returnbook.create', compact('peminjaman'));
     }
@@ -59,7 +60,7 @@ class ReturnBookController extends Controller
 
     public function show(string $id)
     {
-        $pengembalian = Returbook::findOrFail($id);
+        $pengembalian = Returbuku::findOrFail($id);
 
 
         return view('returnbook.show', compact('pengembalian'));
@@ -72,20 +73,19 @@ class ReturnBookController extends Controller
             'borrowing_id' => 'required',
             'status' => 'nullable',
             'description' => 'nullable',
-            'photo' => 'nullable|image|mimes:jpeg,png,gif|max:2048', // Contoh validasi untuk foto
+            'photo' => 'nullable|image|mimes:jpeg,png,gif|max:2048',
         ]);
 
         $photoPath = null;
 
         if ($request->hasFile('photo')) {
-            $photoPath = $request->file('photo')->store('photos', 'public'); // Menyimpan foto ke direktori yang ditentukan
+            $photoPath = $request->file('photo')->store('photos', 'public'); //
         }
 
-        // Simpan data berdasarkan logika yang sesuai dengan struktur data Anda
-        Returbook::create([
-            'borrowing_id' => $request->input('borrowing_id'),
+        Returbuku::create([
+            'peminjaman_id' => $request->input('borrowing_id'),
             'status' => 'PENDING',
-            'description' => 'Belum Disetujui',
+            'deskripsi' => 'Belum Disetujui',
             'photo' => $photoPath,
         ]);
 
@@ -95,7 +95,7 @@ class ReturnBookController extends Controller
 
     public function edit(string $id)
     {
-        $pengembalian = Returbook::findOrFail($id);
+        $pengembalian = Returbuku::findOrFail($id);
 
         return view('returnbook.edit', compact('pengembalian'));
     }
@@ -105,14 +105,14 @@ class ReturnBookController extends Controller
         $validatedData = $request->validate([
 
             'status' => 'required',
-            'description' => 'nullable|string',
+            'deskripsi' => 'nullable|string',
 
         ]);
 
-        $pengembalian = Returbook::findOrFail($id);
+        $pengembalian = Returbuku::findOrFail($id);
 
         $pengembalian->status = $validatedData['status'];
-        $pengembalian->description = $validatedData['description'];
+        $pengembalian->deskripsi = $validatedData['description'];
 
 
         $pengembalian->save();
@@ -124,7 +124,7 @@ class ReturnBookController extends Controller
 
     public function destroy(string $id)
     {
-        $pengembalian = Returbook::findOrFail($id);
+        $pengembalian = Returbuku::findOrFail($id);
         $pengembalian->delete();
 
         return redirect()->route('pengembalian-buku.index')

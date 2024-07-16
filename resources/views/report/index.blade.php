@@ -69,19 +69,19 @@
                                 @foreach ($peminjaman as $p)
                                     <tr>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                            {{ $p->borrow_number }}
+                                            {{ $p->no_peminjaman }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-900">
-                                            {{ $p->user->name }}
+                                            {{ $p->user->nama }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-900">
-                                            {{ $p->book_title }}
+                                            {{ $p->buku->nama_buku }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-900">
-                                            {{ \Carbon\Carbon::parse($p->borrow_date)->format('d M Y') }}
+                                            {{ \Carbon\Carbon::parse($p->tgl_peminjaman)->format('d M Y') }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-900">
-                                            {{ \Carbon\Carbon::parse($p->return_date)->format('d M Y') }}
+                                            {{ \Carbon\Carbon::parse($p->tgl_pengembalian)->format('d M Y') }}
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-900">
                                             {{ $p->status }}

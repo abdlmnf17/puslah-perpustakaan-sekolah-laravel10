@@ -17,11 +17,11 @@ class AdminSeeder extends Seeder
         //silahkan ubah
 
         User::create([
-            'name' => 'Admin',
+            'nama' => 'Admin',
             'email' => 'admin@gmail.com',
             'role' => 'admin',
-            'identity' => '111111', //masukan NIP
-            'adress' => 'Karawang', //masukan alamat
+            'identitas' => '111111', //masukan NIP
+            'alamat' => 'Karawang', //masukan alamat
             'password' => Hash::make('password'),
             'created_at' => now(),
             'updated_at' => now(),

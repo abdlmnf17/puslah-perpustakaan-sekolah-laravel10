@@ -39,17 +39,19 @@
                 <th>Judul Buku</th>
                 <th>Tanggal Pinjam</th>
                 <th>Tanggal Kembali</th>
+                <th>Total Denda</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($peminjaman as $p)
                 <tr>
-                    <td>{{ $p->borrow_number }}</td>
-                    <td>{{ $p->user->name }}</td>
-                    <td>{{ $p->book_title }}</td>
-                    <td>{{ Carbon\Carbon::parse($p->borrow_date)->format('d M Y') }}</td>
-                    <td>{{ Carbon\Carbon::parse($p->return_date)->format('d M Y') }}</td>
+                    <td>{{ $p->no_peminjaman }}</td>
+                    <td>{{ $p->user->nama }}</td>
+                    <td>{{ $p->buku->nama_buku }}</td>
+                    <td>{{ Carbon\Carbon::parse($p->tgl_peminjaman)->format('d M Y') }}</td>
+                    <td>{{ Carbon\Carbon::parse($p->tgl_pengembalian)->format('d M Y') }}</td>
+                    <td>Rp. {{ $p->total_denda }}</td>
                     <td>{{ $p->status }}</td>
                 </tr>
             @endforeach

@@ -42,11 +42,11 @@
         <tbody>
             @foreach ($peminjaman as $p)
                 <tr>
-                    <td>{{ $p->borrow_number }}</td>
-                    <td>{{ $p->user->name }}</td>
-                    <td>{{ $p->book_title }}</td>
-                    <td>{{ $p->borrow_date->format('d M Y') }}</td>
-                    <td>{{ $p->return_date->format('d M Y') }}</td>
+                    <td>{{ $p->no_peminjaman }}</td>
+                    <td>{{ $p->user->nama }}</td>
+                    <td>{{ $p->penulis }}</td>
+                    <td>{{ $p->tgl_peminjaman->format('d M Y') }}</td>
+                    <td>{{ $p->tgl_pengembalian->format('d M Y') }}</td>
                     <td>{{ $p->status }}</td>
                 </tr>
             @endforeach

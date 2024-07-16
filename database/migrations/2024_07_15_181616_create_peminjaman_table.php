@@ -11,25 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('borrowings', function (Blueprint $table) {
+        Schema::create('peminjaman', function (Blueprint $table) {
             $table->id();
-            $table->string('book_title');
-            $table->string('author');
-            $table->integer('release_year')->nullable();
-            $table->date('borrow_date');
-            $table->date('return_date');
+            $table->string('no_peminjaman');
+            $table->date('tgl_peminjaman');
+            $table->date('tgl_pengembalian');
             $table->string('status')->nullable();;
-            $table->string('description')->nullable();;
+            $table->string('deskripsi')->nullable();;
+            $table->decimal('total_denda', 10, 2)->default(0.00);
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('buku_id')->constrained('buku');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('borrowings');
+        Schema::dropIfExists('peminjaman');
     }
 };

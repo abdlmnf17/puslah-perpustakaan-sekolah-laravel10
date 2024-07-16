@@ -18,17 +18,17 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)"
-                required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-input-label for="nama" :value="__('Name')" />
+            <x-text-input id="nama" name="nama" type="text" class="mt-1 block w-full" :value="old('nama', $user->nama)"
+                required autofocus autocomplete="nama" />
+            <x-input-error class="mt-2" :messages="$errors->get('nama')" />
         </div>
         <!-- Address -->
         <div>
-            <x-input-label for="adress" :value="__('Alamat')" />
-            <x-text-input id="adress" name="adress" type="text" class="mt-1 block w-full" :value="old('adress', $user->adress)"
-                required autocomplete="adress" />
-            <x-input-error class="mt-2" :messages="$errors->get('adress')" />
+            <x-input-label for="alamat" :value="__('Alamat')" />
+            <x-text-input id="alamat" name="alamat" type="text" class="mt-1 block w-full" :value="old('alamat', $user->alamat)"
+                required autocomplete="alamat" />
+            <x-input-error class="mt-2" :messages="$errors->get('alamat')" />
         </div>
 
         <!-- Phone -->
@@ -41,18 +41,18 @@
 
         <!-- Identity (e.g., ID number, Passport number) -->
         <div>
-            <x-input-label for="identity" :value="__('NIS / NIP')" />
-            <x-text-input id="identity" name="identity" type="text" class="mt-1 block w-full" :value="old('identity', $user->identity)"
-                required autocomplete="identity" />
-            <x-input-error class="mt-2" :messages="$errors->get('identity')" />
+            <x-input-label for="identitas" :value="__('NIS / NIP')" />
+            <x-text-input id="identitas" name="identitas" type="text" class="mt-1 block w-full" :value="old('identitas', $user->identitas)"
+                required autocomplete="identitas" />
+            <x-input-error class="mt-2" :messages="$errors->get('identitas')" />
         </div>
 
         <!-- Class -->
         <div>
-            <x-input-label for="class" :value="__('Kelas')" />
-            <x-text-input id="class" name="class" type="text" class="mt-1 block w-full" :value="old('class', $user->class)"
-                required autocomplete="class" />
-            <x-input-error class="mt-2" :messages="$errors->get('class')" />
+            <x-input-label for="kelas" :value="__('Kelas')" />
+            <x-text-input id="kelas" name="kelas" type="text" class="mt-1 block w-full" :value="old('kelas', $user->kelas)"
+                required autocomplete="kelas" />
+            <x-input-error class="mt-2" :messages="$errors->get('kelas')" />
         </div>
 
 

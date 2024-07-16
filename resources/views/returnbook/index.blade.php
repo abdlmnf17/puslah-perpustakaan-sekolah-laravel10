@@ -16,9 +16,11 @@
 
                 <div
                     class="mb-4 flex flex-col sm:flex-row justify-between items-center space-y-2 sm:space-y-0 sm:space-x-4">
+                    @if(auth()->user()->role !== 'admin')
                     <x-secondary-button href="{{ route('pengembalian-buku.create') }}">
                         Tambah
                     </x-secondary-button>
+                    @endif
 
                     <form action="{{ route('pengembalian-buku.index') }}" method="GET"
                     class="flex flex-col sm:flex-row items-center mt-4 sm:mt-0 space-y-2 sm:space-y-0 sm:space-x-4">
@@ -82,14 +84,14 @@
                                 @forelse ($pengembalian as $item)
                                     <tr>
                                         <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $item->borrowing->borrow_number }}
+                                            {{ $item->peminjaman->no_peminjaman }}
                                         </td>
                                         <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $item->borrowing->user->name }}</td>
+                                            {{ $item->peminjaman->user->nama }}</td>
                                         <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $item->borrowing->book_title }}</td>
+                                            {{ $item->peminjaman->buku->nama_buku }}</td>
                                         <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $item->description }}</td>
+                                            {{ $item->deskripsi }}</td>
                                         <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-900">
                                             {{ $item->status }}</td>
 

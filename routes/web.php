@@ -6,6 +6,7 @@ use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\BorrowingController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReturnBookController;
+use App\Http\Controllers\BukuController;
 use App\Models\Borrowing;
 use App\Models\Returbook;
 use Illuminate\Support\Facades\Route;
@@ -54,6 +55,15 @@ Route::middleware('auth', 'admin')->group(function () {
     Route::get('/peminjaman-buku/{id}/edit', [BorrowingController::class, 'edit'])->name('peminjaman-buku.edit');
     Route::put('/peminjaman-buku/{id}', [BorrowingController::class, 'update'])->name('peminjaman-buku.update');
     Route::delete('/peminjaman-buku/{id}', [BorrowingController::class, 'destroy'])->name('peminjaman-buku.destroy');
+
+
+    Route::get('/buku', [BukuController::class, 'index'])->name('buku.index');
+    Route::post('/buku', [BukuController::class, 'store'])->name('buku.store');
+    Route::get('/buku/create', [BukuController::class, 'create'])->name('buku.create');
+    Route::get('/buku/{id}/edit', [BukuController::class, 'edit'])->name('buku.edit');
+    Route::get('/buku/{id}', [BukuController::class, 'show'])->name('buku.show');
+    Route::put('/buku/{id}', [BukuController::class, 'update'])->name('buku.update');
+    Route::delete('/buku/{id}', [BukuController::class, 'destroy'])->name('buku.destroy');
 
     Route::get('/pengembalian-buku/{id}/edit', [ReturnbookController::class, 'edit'])->name('pengembalian-buku.edit');
     Route::put('/pengembalian-buku/{id}', [ReturnbookController::class, 'update'])->name('pengembalian-buku.update');
