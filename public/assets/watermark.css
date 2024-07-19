@@ -1,0 +1,17 @@
+
+.watermark {
+    background-image: url('{{ asset('storage/' . App\Models\Setting::first()->logo) }}');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0); /* Transparent */
+    position: absolute;
+    top: 0;
+    bottom: 300;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Ensure watermark is behind content */
+    opacity: 0.9; /* Adjust opacity as needed */
+}
+
+
