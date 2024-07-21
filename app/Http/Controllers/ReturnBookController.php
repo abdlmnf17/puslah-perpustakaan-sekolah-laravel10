@@ -105,7 +105,7 @@ class ReturnBookController extends Controller
         $validatedData = $request->validate([
 
             'status' => 'required',
-            'deskripsi' => 'nullable|string',
+            'description' => 'nullable|string',
 
         ]);
 
