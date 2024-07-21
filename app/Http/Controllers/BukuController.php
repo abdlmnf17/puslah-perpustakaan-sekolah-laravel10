@@ -92,7 +92,7 @@ class BukuController extends Controller
 
 
         $buku->peminjaman()->delete();
-        $buku->returbuku()->delete();
+        // $buku->returbuku()->delete();
 
 
         $buku->delete();
