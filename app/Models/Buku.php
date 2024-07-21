@@ -16,4 +16,9 @@ class Buku extends Model
     {
         return $this->hasMany(Peminjaman::class);
     }
+    public function returbuku()
+    {
+        return $this->hasMany(Returbuku::class);
+    }
+
 }

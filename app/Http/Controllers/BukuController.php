@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Buku;
 use App\Models\Peminjaman;
 use Illuminate\Http\Request;
+use  App\Models\Returbuku;
 use App\Models\Setting;
 
 class BukuController extends Controller
@@ -91,6 +92,7 @@ class BukuController extends Controller
 
 
         $buku->peminjaman()->delete();
+        $buku->returbuku()->delete();
 
 
         $buku->delete();

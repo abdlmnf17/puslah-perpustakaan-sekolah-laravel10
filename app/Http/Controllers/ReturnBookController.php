@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Returbuku;
 use App\Models\Setting;
 use App\Models\User;
+use App\Models\Buku;
 use App\Models\Peminjaman;
 
 class ReturnBookController extends Controller

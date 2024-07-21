@@ -16,4 +16,8 @@ class Returbuku extends Model
     {
         return $this->belongsTo(Peminjaman::class);
     }
+    public function buku()
+    {
+        return $this->belongsTo(Buku::class);
+    }
 }
