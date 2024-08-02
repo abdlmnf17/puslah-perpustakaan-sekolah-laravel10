@@ -42,9 +42,8 @@ class ReturnBookController extends Controller
             $status = $request->status;
             $pengembalian->where('status', $status);
         }
-
-        $pengembalian = $pengembalian->get();
-
+        $pengembalian = $pengembalian->paginate(10);
+     
         return view('returnbook.index', compact('pengembalian'));
     }
 

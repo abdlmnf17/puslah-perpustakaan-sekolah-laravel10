@@ -146,6 +146,9 @@
                         </table>
                     </div>
                 </div>
+                <div class="mt-4">
+                    {{ $pengembalian->appends(request()->input())->links() }}
+                </div>
 
 
 

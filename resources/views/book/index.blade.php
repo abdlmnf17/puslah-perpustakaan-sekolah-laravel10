@@ -117,9 +117,9 @@
                     </table>
                 </div>
 
-                {{-- <div class="mt-4">
-                    {{ $peminjaman->appends(request()->input())->links() }}
-                </div> --}}
+                <div class="mt-4">
+                    {{ $buku->appends(request()->input())->links() }}
+                </div>
 
             </div>
         </div>
